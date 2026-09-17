@@ -1,0 +1,150 @@
+[gd_scene load_steps=13 format=3 uid="uid://hxt85eyvo60m"]
+
+[ext_resource type="Script" uid="uid://oa054o063yju" path="res://CTD_player/game_over.gd" id="1_piii3"]
+[ext_resource type="StyleBox" uid="uid://bpx58p6f3onct" path="res://CTD_player/game_over.tres" id="2_m510y"]
+[ext_resource type="FontFile" uid="uid://cwhk1lenvtian" path="res://assets/font/at01.ttf" id="2_piii3"]
+
+[sub_resource type="Animation" id="Animation_ghj3e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_piii3"]
+resource_name = "fadeout"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sa74d"]
+_data = {
+&"RESET": SubResource("Animation_ghj3e"),
+&"fadeout": SubResource("Animation_piii3")
+}
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_beml5"]
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beml5"]
+size = Vector2(600, 400)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m510y"]
+bg_color = Color(0.91, 0.37977332, 0.07279999, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.54, 0.22535999, 0.043199994, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_piii3"]
+bg_color = Color(0.228, 0.29006675, 0.76, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.110000014, 0.15550005, 0.5, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m510y"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_beml5"]
+b = Vector2(650, 0)
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_piii3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../RigidBody2D/CollisionShape2D")
+libraries = {
+&"": SubResource("AnimationLibrary_sa74d")
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+z_index = 11
+offset_right = 600.0
+offset_bottom = 400.0
+color = Color(0, 0, 0, 0)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+physics_material_override = SubResource("PhysicsMaterial_beml5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(300, 200)
+shape = SubResource("RectangleShape2D_beml5")
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D"]
+modulate = Color(1, 0.089999974, 0.25683337, 1)
+offset_right = 600.0
+offset_bottom = 400.0
+
+[node name="Label" type="Label" parent="RigidBody2D"]
+offset_left = 125.0
+offset_top = 78.0
+offset_right = 482.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("2_piii3")
+theme_override_font_sizes/font_size = 112
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="RigidBody2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 226.0
+offset_top = 205.0
+offset_right = 382.0
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_piii3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("2_m510y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m510y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_piii3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m510y")
+text = "Neustart"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 800)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_beml5")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="RigidBody2D/Restart" to="." method="_on_restart_pressed"]

@@ -1,0 +1,58 @@
+Todos?:
+
+
+####Collision zwischen shiff und Land
+
+Wolken
+    nur außerhalb des sichtfeldes
+    bei init einmal alle erstellen
+    sterben lassen wenn außerhalb der Tilemap
+    vielleicht auch regen Wolken.
+
+Sounds
+    ########Musik
+    Wellenrauschen
+    Motorengeräusche
+    Typhon
+    Bootspfeife ?
+    Wind ab und zu
+    Wenn Sturm dann Sturm
+    "Auf Station", "Station Beendet", "Labor Brücke"
+
+
+
+
+Stationen erstellen
+    Windenfahren / CTD Spiel
+            gleichzeitig Geschwindigkeit einstellen und Hindernissen ausweichen
+            blubberblase zeigen den Messpunkt den man einsammeln soll, muss eine Zeitlang warten bis man das eingesammelt hat und weiter kann.
+
+
+Häfen
+
+
+Schiffsprites
+    isometrische Perspektive
+    Animationen
+    up, down erstellen
+
+TileMap Sprites überarbeiten
+    schrägen so das komliziertere shapes möglich werden
+
+Animated Tiles
+
+
+Ideen:
+
+    Routenplanen
+    Weltkarte
+    Kranfahren?
+    Pirata + Angeln
+    Stürme
+    Kochen
+        Sachen in den Kochtopf werfen, Topf bewegt sich auf der Arbeitsplatte
+        Interaktionen mit dem Kochfeld, Flamme geht aus, Begrenzung geht kaputt etc.
+        vielleicht ein Takt spiel drauß machen.
+
+    Events
+        Kraken Angriff

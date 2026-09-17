@@ -1,0 +1,369 @@
+[gd_scene format=3 uid="uid://cnxsayptv1bo7"]
+
+[ext_resource type="Texture2D" uid="uid://mn4nui1tovb1" path="res://sprites/WindenDisplay.png" id="1_fyx5e"]
+[ext_resource type="Texture2D" uid="uid://d1isuuex3itfv" path="res://sprites/Funke.png" id="2_01y6e"]
+[ext_resource type="Texture2D" uid="uid://cv1q460koqi6" path="res://sprites/winden_Display_display.png" id="2_amnh2"]
+[ext_resource type="Texture2D" uid="uid://drtchkoiwlpda" path="res://sprites/blau.png" id="3_f4kli"]
+[ext_resource type="FontFile" uid="uid://hblt7vq5g7u1" path="res://assets/font/BridgeParapet.ttf" id="4_te0lm"]
+[ext_resource type="PackedScene" uid="uid://ci3y4gowh4u73" path="res://CTD_player/CTD.tscn" id="6_ej6pu"]
+[ext_resource type="Script" uid="uid://dr53lh6qxsut8" path="res://CTD_player/ctd_game_manager.gd" id="7_7ykhj"]
+[ext_resource type="Texture2D" uid="uid://ddnwn2h68u1jb" path="res://sprites/HebelAnim.png" id="8_53obq"]
+[ext_resource type="Texture2D" uid="uid://cinmh5lh24ewy" path="res://sprites/rauch.png" id="9_amnh2"]
+[ext_resource type="Texture2D" uid="uid://xiwm2uc3l1p2" path="res://sprites/SchwenkHebel.png" id="9_te0lm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4kli"]
+size = Vector2(214, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qe40"]
+size = Vector2(398, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h35oo"]
+size = Vector2(392, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnx8k"]
+size = Vector2(214, 6)
+
+[sub_resource type="Animation" id="Animation_bpem5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Fadein:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Fadein:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_te0lm"]
+resource_name = "fadein"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Fadein:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Fadein:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b06r6"]
+_data = {
+&"RESET": SubResource("Animation_bpem5"),
+&"fadein": SubResource("Animation_te0lm")
+}
+
+[sub_resource type="Animation" id="Animation_4roit"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/rauch1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/rauch1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/rauch1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_amnh2"]
+resource_name = "rauch"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/rauch1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/rauch1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/rauch1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bpem5"]
+_data = {
+&"RESET": SubResource("Animation_4roit"),
+&"rauch": SubResource("Animation_amnh2")
+}
+
+[node name="CtdGame" type="Node2D" unique_id=1619796292]
+
+[node name="WindenDisplay" type="Sprite2D" parent="." unique_id=1305788659]
+z_index = 1
+position = Vector2(301, 200)
+texture = ExtResource("1_fyx5e")
+
+[node name="Display" type="Sprite2D" parent="WindenDisplay" unique_id=1860224692]
+position = Vector2(-107, -51)
+texture = ExtResource("2_amnh2")
+
+[node name="Labels" type="Node2D" parent="WindenDisplay/Display" unique_id=1457062149]
+z_index = 1
+position = Vector2(-149, -99)
+
+[node name="Winde" type="Label" parent="WindenDisplay/Display/Labels" unique_id=1911117654]
+modulate = Color(0, 0, 0, 1)
+offset_left = 76.0
+offset_top = -16.0
+offset_right = 367.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 48
+text = "Winde 2"
+metadata/_edit_use_anchors_ = true
+
+[node name="Arbeitslänge" type="Label" parent="WindenDisplay/Display/Labels" unique_id=318421705]
+modulate = Color(0, 0, 0, 1)
+offset_left = -7.0
+offset_top = 36.0
+offset_right = 205.0
+offset_bottom = 69.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+text = "Arbeitslänge: "
+metadata/_edit_use_anchors_ = true
+
+[node name="ArbeitslängeAnz" type="Label" parent="WindenDisplay/Display/Labels" unique_id=1698254762]
+modulate = Color(0, 0, 0, 1)
+offset_left = 176.0
+offset_top = 35.0
+offset_right = 264.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Zugkraft" type="Label" parent="WindenDisplay/Display/Labels" unique_id=632238518]
+modulate = Color(0, 0, 0, 1)
+offset_left = -7.0
+offset_top = 65.0
+offset_right = 208.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+text = "Zugkraft: "
+metadata/_edit_use_anchors_ = true
+
+[node name="ZugkraftAnz" type="Label" parent="WindenDisplay/Display/Labels" unique_id=1448393800]
+modulate = Color(0, 0, 0, 1)
+offset_left = 176.0
+offset_top = 62.0
+offset_right = 264.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Geschwindigkeit" type="Label" parent="WindenDisplay/Display/Labels" unique_id=278553907]
+modulate = Color(0, 0, 0, 1)
+offset_left = -7.0
+offset_top = 92.0
+offset_right = 211.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+text = "Geschwindigkeit: "
+metadata/_edit_use_anchors_ = true
+
+[node name="GeschwindigkeitAnz" type="Label" parent="WindenDisplay/Display/Labels" unique_id=1195365925]
+modulate = Color(0, 0, 0, 1)
+offset_left = 176.0
+offset_top = 91.0
+offset_right = 264.0
+offset_bottom = 119.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Tiefe" type="Label" parent="WindenDisplay/Display/Labels" unique_id=1613553248]
+modulate = Color(0, 0, 0, 1)
+offset_left = -7.0
+offset_top = 121.0
+offset_right = 209.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+text = "Wassertiefe: "
+metadata/_edit_use_anchors_ = true
+
+[node name="TiefeAnz" type="Label" parent="WindenDisplay/Display/Labels" unique_id=180991739]
+modulate = Color(0, 0, 0, 1)
+offset_left = 176.0
+offset_top = 122.0
+offset_right = 264.0
+offset_bottom = 150.0
+theme_override_fonts/font = ExtResource("4_te0lm")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Funke" type="Sprite2D" parent="." unique_id=755554814]
+z_index = 1
+position = Vector2(52, 312)
+texture = ExtResource("2_01y6e")
+
+[node name="Blau" type="Sprite2D" parent="." unique_id=1474309716]
+z_index = -1
+position = Vector2(493, 200)
+texture = ExtResource("3_f4kli")
+
+[node name="Ctd" parent="." unique_id=667976356 instance=ExtResource("6_ej6pu")]
+position = Vector2(549, 40)
+
+[node name="Hebel" type="Node2D" parent="." unique_id=1376621684]
+z_index = 1
+
+[node name="GasHebel" type="Sprite2D" parent="Hebel" unique_id=555274872]
+position = Vector2(168, 346)
+texture = ExtResource("8_53obq")
+hframes = 3
+
+[node name="SchwenkHebel" type="Sprite2D" parent="Hebel" unique_id=1588937852]
+position = Vector2(235, 339)
+texture = ExtResource("9_te0lm")
+hframes = 5
+
+[node name="Grenzen" type="StaticBody2D" parent="." unique_id=1425233009]
+
+[node name="Unten" type="CollisionShape2D" parent="Grenzen" unique_id=1268785809]
+position = Vector2(493, 398)
+shape = SubResource("RectangleShape2D_f4kli")
+
+[node name="Rechts" type="CollisionShape2D" parent="Grenzen" unique_id=1502443388]
+position = Vector2(602, 203)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_0qe40")
+
+[node name="Links" type="CollisionShape2D" parent="Grenzen" unique_id=240046663]
+position = Vector2(386, 199)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_h35oo")
+
+[node name="Oben" type="CollisionShape2D" parent="Grenzen" unique_id=1537822727]
+position = Vector2(495, -4)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_rnx8k")
+
+[node name="Hindernisse" type="Node2D" parent="." unique_id=816319626]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1241072214]
+libraries/ = SubResource("AnimationLibrary_b06r6")
+autoplay = &"fadein"
+
+[node name="Fadein" type="ColorRect" parent="AnimationPlayer" unique_id=514093000]
+visible = false
+z_index = 11
+offset_right = 600.0
+offset_bottom = 400.0
+color = Color(0, 0, 0, 1)
+
+[node name="CTDGameManager" type="Node" parent="." unique_id=201126103]
+unique_name_in_owner = true
+script = ExtResource("7_7ykhj")
+
+[node name="AnzeigenTimer" type="Timer" parent="CTDGameManager" unique_id=2116639547]
+
+[node name="HindernisTimer" type="Timer" parent="CTDGameManager" unique_id=1166801367]
+
+[node name="schäden" type="Node2D" parent="." unique_id=1669954274]
+
+[node name="stufe1" type="Node2D" parent="schäden" unique_id=864121424]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="schäden/stufe1" unique_id=624331658]
+libraries/ = SubResource("AnimationLibrary_bpem5")
+
+[node name="rauch1" type="Sprite2D" parent="schäden/stufe1/AnimationPlayer" unique_id=12538271]
+visible = false
+z_index = 3
+position = Vector2(219, 233)
+texture = ExtResource("9_amnh2")
+hframes = 8

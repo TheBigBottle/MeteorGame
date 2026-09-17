@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://bju2g5urfq2dq"]
+
+[ext_resource type="PackedScene" uid="uid://d45qyqo4rx0c" path="res://CTD_player/Hit_zone.tscn" id="1_dqdds"]
+[ext_resource type="Script" uid="uid://bts7oi033sfvy" path="res://CTD_player/Hindernis.gd" id="1_fsbbr"]
+[ext_resource type="Texture2D" uid="uid://cjrbbu6wq7x65" path="res://sprites/Ctd_alge.png" id="1_xw7mw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fsbbr"]
+radius = 7.0
+height = 88.0
+
+[sub_resource type="Animation" id="Animation_1k7la"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitZone/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6ekno"]
+resource_name = "shrink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitZone/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_814p3"]
+_data = {
+&"RESET": SubResource("Animation_1k7la"),
+&"shrink": SubResource("Animation_6ekno")
+}
+
+[node name="Hindernis" type="Node2D"]
+script = ExtResource("1_fsbbr")
+
+[node name="HitZone" parent="." instance=ExtResource("1_dqdds")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+shape = SubResource("CapsuleShape2D_fsbbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xw7mw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_814p3")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

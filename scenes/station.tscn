@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2f0t53214atf"]
+
+[ext_resource type="Script" uid="uid://u6u62b7kqg6y" path="res://scripts/station.gd" id="1_0r0hh"]
+[ext_resource type="Texture2D" uid="uid://ckpdvgn7fpwmn" path="res://sprites/station.png" id="1_rod8h"]
+[ext_resource type="FontFile" uid="uid://hblt7vq5g7u1" path="res://assets/font/BridgeParapet.ttf" id="3_rvx7u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0r0hh"]
+radius = 13.038404
+
+[sub_resource type="Animation" id="Animation_7hcop"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anweisung:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13, -31)]
+}
+
+[sub_resource type="Animation" id="Animation_csis4"]
+resource_name = "hovertext"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anweisung:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(13, -31), Vector2(13, -43)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fmmug"]
+_data = {
+&"RESET": SubResource("Animation_7hcop"),
+&"hovertext": SubResource("Animation_csis4")
+}
+
+[sub_resource type="Animation" id="Animation_fmmug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rvx7u"]
+resource_name = "fadein"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g6ujh"]
+resource_name = "fadeout"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6ujh"]
+_data = {
+&"RESET": SubResource("Animation_fmmug"),
+&"fadein": SubResource("Animation_rvx7u"),
+&"fadeout": SubResource("Animation_g6ujh")
+}
+
+[node name="Station" type="Node2D"]
+script = ExtResource("1_0r0hh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rod8h")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, -3)
+shape = SubResource("CircleShape2D_0r0hh")
+
+[node name="Anweisung" type="Label" parent="."]
+visible = false
+offset_left = 13.0
+offset_top = -31.0
+offset_right = 64.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("3_rvx7u")
+text = "E drücken"
+
+[node name="Hovertext" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fmmug")
+}
+
+[node name="Fade" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Anweisung")
+libraries = {
+&"": SubResource("AnimationLibrary_g6ujh")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="Fade" to="." method="_on_fade_animation_finished"]

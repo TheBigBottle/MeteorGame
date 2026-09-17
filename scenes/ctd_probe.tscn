@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxcmbytd7ywrh"]
+
+[ext_resource type="PackedScene" uid="uid://d056f24b7yxnb" path="res://scenes/bubble.tscn" id="1_b244q"]
+[ext_resource type="Texture2D" uid="uid://bs85bxis25fet" path="res://sprites/bubble.png" id="2_ehn1e"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bjuyi"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 21.36
+gravity = Vector3(0, -50, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ehn1e"]
+radius = 16.03122
+
+[node name="CTD_Probe" type="Node2D"]
+
+[node name="Bubble" parent="." instance=ExtResource("1_b244q")]
+position = Vector2(-1, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(0.3, 0.3)
+amount = 3
+texture = ExtResource("2_ehn1e")
+lifetime = 0.44
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bjuyi")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ehn1e")
